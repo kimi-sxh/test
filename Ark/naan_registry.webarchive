@@ -1,0 +1,1330 @@
+bplist00�_WebMainResource�	
+_WebResourceTextEncodingName_WebResourceFrameName^WebResourceURL_WebResourceData_WebResourceMIMETypeUUTF-8P_3http://www.cdlib.org/services/uc3/naan_registry.txtO��<html><head></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">erc:
+who:	University of California Curation Center (UC3),
+	   California Digital Library (CDL)
+what:	Name Assigning Authority Number (NAAN) Registry
+when:	2012.12.11
+where:	http://cdlib.org/uc3/naan_registry.txt
+where:	http://bnf.fr/xxx/naan_registry.txt
+where:	http://www.nlm.nih.gov/naan/naan_registry.txt
+huh:	utf-8
+
+# --- start preamble ---
+#
+#          Name Assigning Authority Number (NAAN) Registry
+#
+# Each record in this registry file specifies a Name Assigning Authority
+# (NAA) and a unique NAA Number (NAAN) that is permanently associated with
+# it for the purposes of name (identifier) assignment.  An NAA is an
+# organization that assigns names.  If each NAA begins its names with its
+# own NAAN, assignments of one NAA will never conflict with those of
+# another NAA.  The records in this file conform to the ANVL format:
+# http://cdlib.org/uc3/docs/anvlspec.pdf .
+#
+# Each record also specifies an organization-level resolution target for
+# N2T (Name-to-Thing), a scheme-agnostic identifier resolver.  The present
+# form of the registry descends from the ARK (Archival Resource Key) NAAN
+# registry, but can work with a number of different schemes, including ARK,
+# URL, DOI, Handle, and URN.  
+#
+# Terminology is based on the metaphor of a key (or name or identifier),
+# locksmithing jargon, and the concept of a branded plastic key-cover.
+#
+#        _____    slips on    _____
+#     .-'  ,_,'-..  ----&gt;  .-'     '-.
+#    /    (o,o)  \\       /           \
+#   :     {`"'}  ||      :             `____
+#  /  .-. -"-"-  ||     /  .-.              '--^.   .^--^.        .^.
+# {  (   )       ||    {  (   )                  `-'      `-^--^-'   '--^.
+#  \  `-'   _o   ||     \  '-'         ===================================}
+#   :     _|&lt;,_  ||      :             __________________________________/
+#    \   (*)/(*) /        \           /
+#     `-._____.-'          `-._____.-'
+# |....................|...............|....|..........................|..|
+#           ^                    ^        ^                ^            ^
+#           :                    :        :                :            :
+#         Cover=               Bow=    Shoulder  .------ Blade         Tip
+#          NMA             Scheme+NAAN    :      :  .-------------------'
+#           :                  :    :     :      :  :
+#           v                  v    v     v      v  v
+# |..........................|....+.....|...|......|.|
+#  http://OwlBike.example.org/ark:/13030/tqb3kh97gh8w   &lt;----  Example Key
+#                              doi:10.30/tqb3kh97gh8w         with parallel
+#                              hdl:13030/tqb3kh97gh8w        parts in other
+#                              urn:13030:tqb3kh97gh8w          id schemes.
+# |..........................|.......................|....
+#    Name Mapping Authority       Base identifier      ...
+#
+#       NMA = Name Mapping Authority, in other words, an identifier
+#             service provider; as a branded and replaceable add-on,
+#             this "cover" helps make a key actionable
+#
+#    Scheme = Identifier type, which tells how the NAAN is delimited
+#
+#      NAAN = Opaque name for the organization that created the identifier;
+#             a key's "bow" (Scheme+NAAN) is immutable, but not its "cover"
+#
+#  Shoulder = Fixed pattern extending the Bow to the Blade; NAA determines
+#             how the pattern is delimited, which permits it to partition
+#             its namespace opaquely into sub-namespaces and to delegate
+#             name assignment; example Shoulder above ends with first digit
+#
+#     Blade = Variable pattern extending the Shoulder to the Tip
+#
+#       Tip = Final characters of Base identifier, critical for computing
+#             check characters; for ARKs, Base ends before the next '/'
+#
+#   Base id = Identifier for an object (thing) at its coarsest level of
+#             granularity and without identifier extensions; defined for
+#             all ARKs but for other identifiers depends on local practice
+#
+# Extension = Pattern appended to Base that names parts of an object and
+#             variants thereof; may be assigned by the NAA or not; may be
+#             invented and publicized by an NMA; generally unstructured,
+#             but ARKs reserve '/' and '.' to disclose structure; example:
+#
+#                  ark:/13030/tqb3kh97gh8z/chap3/fig5.jpg
+#                 |.......................|..............|
+#                      Base identifier       Extension
+#
+# // Opacity
+#
+# Many of these terms serve semantic opacity, which is useful in creating
+# base identifiers that age and travel well.  Opacity is often balanced by
+# the addition of hints in replaceable appendages to the base, such as NMA
+# branding before it and extensions that suggest current service offerings.
+#
+# // Resolution
+#
+# A Name Mapping Authority (NMA) can be a starting place for internet
+# resolution, an ending place for it, or both.  The main requirement for
+# being an NMA for an object is being able to take a request associated
+# with its identifier and do something useful with it (to "map" it to a
+# practical function), such as providing access to the object or its
+# metadata, or forwarding the request to another NMA.  Often an NMA will
+# provide object access for some requests and forwarding for others.
+#
+# A broadly helpful practice is for NMAs to forward completely unknown
+# identifier requests to a root resolver such as n2t.info, which can work
+# with any identifier scheme (described below).  With very little burden
+# to the original NMA, this practice increases the chances that resolution
+# will be successful no matter where the user starts it.
+#
+# ARKs, URLs, and PURLs use manifest, scheme-agnostic redirecting HTTP
+# servers as NMAs.  The DOI, Handle, and URN schemes are each designed
+# to use an implicit, scheme-specific root resolver (NMA) with its own
+# protocol.  Resolution in all these cases relies on a final HTTP access.
+#
+# // N2T Resolver
+#
+# The N2T root resolver is an NMA that takes an incoming identifier's
+# NAAN and looks it up in this registry.  If there is an identifier service
+# provider (another NMA) corresponding to the NAAN, the identifier is
+# redirected to it.  In standard usage, identifiers are published as URLs
+# with n2t.info as the hostname to ensure that resolution starts with the
+# root resolver.
+#
+# N2T was originally designed for global resolution of ARK identifiers,
+# but it is general enough to apply to identifiers from any scheme.  It's
+# mechanism is functionally equivalent to each of the DOI, Handle, and URN
+# resolution mechanisms.
+#
+# // Kinds of Namespaces
+#
+# Resolution involves namespaces of different kinds.  These definitions
+# use the term "pool" to mean all possible names within some constraint.
+#
+#   Schemespace = pool of identifier schemes (ark, doi, hdl, urn, etc.)
+#      Bowspace = pool of NAANs within a given scheme (eg, ark:/13030)
+# Shoulderspace = pool of Shoulders within a given NAAN
+#    Bladespace = pool of identifiers sharing a given NAAN and Shoulder
+#                 (eg, ark:/13030/xh4...)
+#
+# These terms are also used, but often more loosely.
+#
+#     Namespace = pool of identifiers sharing a given NAAN
+# Sub-namespace = pool of identifiers sharing a given NAAN and Shoulder
+#               = Bladespace
+#
+# // Namespace Partitioning and the "First Digit" Shoulder Convention
+#
+# A common way to manage assignments in the namespace under a NAAN (a
+# Bowspace) is to partition it, namely, to divide it into non-overlapping
+# sub-namespaces.  Assignments are then delegated to sub-namespaces where
+# uniqueness within each sub-namespace achieves uniqueness overall.
+#
+# One of the easiest ways to partition a namespace is with extended
+# prefixing.  By extending the NAAN with a fixed Shoulder prefix that is
+# unique for each sub-namespace, any assignments in that Bladespace (i.e.,
+# that begin with the given NAAN and Shoulder) will never conflict with
+# those in another Bladespace.  The same principle guides the concept of
+# using unique NAANs to partition the Bowspace, which is the highest level
+# of any scheme's namespace.
+#
+# An easy way to extend the Bow in creating a Shoulderspace partition (of
+# separate Bladespaces) that has an unlimited supply of sub-namespaces is
+# to adhere to the "first digit" convention.  In this case each Shoulder
+# is a string of one of more letters ending in a digit (inclusive).  For
+# example, "ark:/13030/b3th89n" would have fixed Shoulder prefix "b3", and
+# the 13030 NAAN could then enjoy an infinite Shoulderspace, including,
+#
+#    b3, c3, d3, ...
+#    bb3, bc3, bd3, ..., cb3, cc3, cd3, ...
+#    bbb3, bbc3, bbd3, ..., bcb3, bcd3, ..., cbb3, cbc3, ...
+#     ...
+#
+# The "first digit" Shoulder convention makes it convenient to create as
+# many unique Shoulder prefixes as may be needed.
+#
+# // Name Extensions
+#
+# An identifier frequently appears with an extension added to its base.
+# For every assigned base identifier, there is in principle an infinite
+# number of extended forms.  In practice, the NAA may not officially
+# list all its extended forms publically.  Moreover, many extended forms
+# are created and publicized by NMAs independent of the NAA assignments.
+#
+# Still more extended forms are discovered by users exploring an NMA's
+# services, for example, by noticing identifier patterns and changing
+# some of the values.  Names designed so that logical changes have logical
+# consequences have been called "hackable identifiers".  Also, sometimes
+# an NMA supports substitution of "parameters" (values) inside of query
+# strings appended to its identifiers (after a "?"), in order to produce
+# certain documented effects.
+#
+# Identifier schemes tend to specify little beyond the form of the NAAN
+# (or other designation for the NAA, sometimes called a Name Authority).
+# The ARK scheme permits formal disclosure of hierarchy and equivalence
+# in name extensions; if used in an ARK, '/' indicates containment and
+# '.' indicates variation.  For example,
+#
+#  ark:/13030/tqb3kh8z/                 # names an object containing...
+#  ark:/13030/tqb3kh8z/chap3            # that in turn contains...
+#  ark:/13030/tqb3kh8z/chap3/fig5.jpg   # that is a variant of...
+#  ark:/13030/tqb3kh8z/chap3/fig5.pdf   # and so forth
+#
+# // The "Noid1" Check Character Convention
+#
+# Check characters, if included at all, often protect only formally
+# published identifiers, such as the base identifier with no extensions.
+# Check characters lengthen whatever sub-string they protect by at least
+# one character, so protecting all sub-string extensions could create
+# fairly long identifiers.  Also, check character generation is a
+# deliberate process that can conflict with the need for rapid and
+# flexible creation of extensions.
+#
+# One useful check character convention, called "Noid1", uses exactly one
+# check character that appears at the Tip of the Blade, in other words,
+# as the last character of the base identifier.  It also uses the Noid1
+# algorithm ( https://confluence.ucop.edu/display/Curation/NOID ), which
+# guarantees the base identifier against the most common transcription
+# errors: transposition of two adjacent characters and single character
+# errors.  Noid1 does not protect either the hostname or any extensions.
+# For example, in the identifier,
+#                                     ,------------,
+#      http://OwlBike.example.org/hdl:13030/tqb3kh8w/chap3/fig5.jpg
+#
+# the protected string, "13030/tqb3kh8w", ends with a "w" that is
+# (hypothetically) the computed Noid1 check character.  Also, all Noid1
+# examples use a restricted character repertoire consisting of digits and
+# lowercase letters minus vowels and minus the letter 'l' (ell).  The
+# Noid software uses this repertoire to reduce the chance of "accidental"
+# semantics in generated identifiers and to avoid some of the confusion
+# that arises over mistaking digits for letters, such as '1' for 'l' and
+# '0' for 'O'.
+#
+# // NAA Record Template
+#
+# Each Name Assigning Authority (NAA) record has the form below.
+# Template items in [square brackets] are optional and items in &lt;angle
+# brackets&gt; are to be replacd with values that apply to the NAA being
+# described.  Most items should be evident from the short label in
+# &lt;brackets&gt;, with a "*" indicating that a longer explanation appears
+# later.  Dates are in TEMPER format "YYYY.MM.DD" or "YYYY", with a "-"
+# indicating a period (eg, tenure in a certain role) that may be closed
+# or open-ended (eg, 2003-2005, 2007-).
+#
+# Some ANVL features used may not be self-evident.  The "(=)" string is
+# used to separate alternative forms (variants) of one value or sub-value.
+# The "|" character separates sub-values that contribute different types
+# of information to the overall value.  The ";" character separates
+# multiple "peer" sub-values (of the same type).  When a value or
+# sub-value is required but missing, the string "(:unkn)" can be used as
+# a coded value meaning "unknown".
+#
+#  naa:
+#  who:   &lt;official organization name&gt;
+#         [ (=) &lt;if different, organization name in english&gt; ]
+#         (=) &lt;display acronym based on DNS name, probably unique&gt;
+#  what:  &lt;NAAN, usually 5 digits, always unique&gt;
+#  when:  &lt;YYYY.MM.DD date registered&gt;
+#  where: &lt;base URL of NMA serving this NAA, used as redirection target&gt;
+#  where: &lt;base URL of NMA serving this NAA&gt;    # repeat element as needed
+#  how:   &lt;OrganizationType*&gt;
+#            | &lt;PolicySummary*&gt;
+#            | [ &lt;start year YYYY of role tenure*&gt;[-&lt;end of tenure&gt; ] ]
+#            | &lt;URL to narrative policy statement&gt;
+#
+#  * OrganizationType (choose one):
+#     NP = Non profit.
+#     FP = For profit.
+#
+#  * PolicySummary (choose as many as apply):
+#     NR = No re-assignment.  Once a base identifier-to-object association
+#          has been made public, that association shall remain unique into
+#          the indefinite future.
+#     OP = Opacity.  Base identifiers shall be assigned with no widely
+#          recognizable semantic information.
+#     CC = A check character is generated in assigned identifiers to guard
+#          against common transcription errors.
+#
+#  * NAA Tenure
+#    The NAA for a given NAAN, while expected to be long-lived, might one
+#    day cease to exist or to assign names, in which case its tenure in
+#    the role of name assigner is indicated.
+#
+# --- end preamble ---
+
+naa:
+who:	US National Library of Medicine (=) USNLM
+what:	12025
+when:	2001.03.08
+where:	http://www.nlm.nih.gov
+how:	NP | (:unkn) unknown | 2001 |
+
+naa:
+who:	Library of Congress (=) USLOC
+what:	12026
+when:	2001.03.08
+where:	http://www.loc.gov
+how:	NP | (:unkn) unknown | 2001 |
+
+naa:
+who:	US National Agricultural Library (=) USNAL
+what:	10113
+when:	2001.03.08
+where:	http://www.nal.usda.gov
+how:	NP | (:unkn) unknown | 2001 |
+
+naa:
+who:	California Digital Library (=) CDLIB
+what:	13030
+when:	2002.07.12
+where:	http://www.cdlib.org
+how:	NP | NR, OP, CC | 2002 | http://www.cdlib.org/inside/diglib/ark/
+
+naa:
+who:	World Intellectual Property Organization (=) WIPO
+what:	13038
+when:	2002.07.12
+where:	http://www.wipo.int
+how:	NP | (:unkn) unknown | 2002 |
+
+naa:
+who:	University of California San Diego (=) UCSD
+what:	20775
+when:	2004.06.02
+where:	http://library.ucsd.edu
+how:	NP | (:unkn) unknown | 2004 |
+
+naa:
+who:	University of California San Francisco (=) UCSF
+what:	29114
+when:	2004.06.02
+where:	http://library.ucsf.edu
+how:	NP | (:unkn) unknown | 2004 |
+
+naa:
+who:	University of California Berkeley (=) UCBERKELEY
+what:	28722
+when:	2004.06.02
+where:	http://library.berkeley.edu
+how:	NP | NR, OP, CC | 2004 |
+
+naa:
+who:	Rutgers University (=) RUTGERS
+what:	15230
+when:	2004.04.30
+where:	http://rci.rutgers.edu
+how:	NP | (:unkn) unknown | 2004 |
+
+naa:
+who:	Internet Archive (=) IA
+what:	13960
+when:	2004.08.29
+where:	http://www.archive.org
+how:	NP | NR, OP, CC | 2004 |
+
+naa:
+who:	Digital Curation Centre (=) DCC
+what:	64269
+when:	2004.09.22
+where:	http://www.dcc.ac.uk
+how:	NP | (:unkn) unknown | 2004 |
+
+naa:
+who:	New York University (=) NYU
+what:	62624
+when:	2004.10.07
+where:	http://library.nyu.edu
+how:	NP | (:unkn) unknown | 2004 |
+
+naa:
+who:	University of North Texas (=) UNT
+what:	67531
+when:	2004.10.07
+where:	http://www.library.unt.edu
+how:	NP | (:unkn) unknown | 2004 |
+
+naa:
+who:	Portico Digital Preservation Service (=) PORTICO
+what:	27927
+when:	2004.12.10
+where:	http://www.portico.org/digital-preservation
+how:	NP | (:unkn) unknown | 2004 |
+
+naa:
+who:	University of California Los Angeles (=) UCLA
+what:	21198
+when:	2005.05.02
+where:	http://library.ucla.edu
+how:	NP | (:unkn) unknown | 2005 |
+
+naa:
+who:	Bibliothèque nationale de France (=) National Library of France (=) BNF
+what:	12148
+when:	2005.07.17
+where:	http://ark.bnf.fr
+how:	NP | NR, OP, CC | 2005 | http://ark.bnf.fr/ark:/12148/bpt6k2102478.policy
+
+naa:
+who:	Princeton University (=) PRINCETON
+what:	88435
+when:	2005.10.06
+where:	http://diglib.princeton.edu
+how:	NP | (:unkn) unknown | 2005 |
+
+naa:
+who:	University of Washington (=) UW
+what:	78428
+when:	2005.10.06
+where:	http://u.washington.edu
+how:	NP | (:unkn) unknown | 2005 |
+
+naa:
+who:	Archives of Region of Västra Götaland and City of Gothenburg, Sweden (=) ARKIVNAMNDEN
+what:	89901
+when:	2005.11.30
+where:	http://www.arkivnamnden.org
+how:	NP | (:unkn) unknown | 2005 |
+
+naa:
+who:	Northwest Digital Archives (=) NWDA
+what:	80444
+when:	2006.01.06
+where:	http://nwda.wsulibs.wsu.edu
+how:	NP | (:unkn) unknown | 2006 |
+
+naa:
+who:	Emory University (=) EMORY
+what:	25593
+when:	2006.01.12
+where:	http://id.library.emory.edu
+how:	NP | (:unkn) unknown | 2006 |
+
+naa:
+who:	University of Kansas (=) UKANSAS
+what:	25031
+when:	2006.03.29
+where:	http://www.lib.ku.edu
+how:	NP | (:unkn) unknown | 2006 |
+
+naa:
+who:	Google (=) GOOGLE
+what:	78319
+when:	2006.08.22
+where:	http://www.google.com
+how:	FP | (:unkn) unknown | 2006 |
+
+naa:
+who:	Centre for Ecology &amp; Hydrology, UK (=) CEH
+what:	17101
+when:	2006.08.20
+where:	http://www.ceh.ac.uk
+how:	NP | (:unkn) unknown | 2006 |
+
+naa:
+who:	University of Calgary (=) UCALGARY
+what:	65323
+when:	2007.06.05
+where:	http://library.ucalgary.ca
+how:	NP | (:unkn) unknown | 2007 |
+
+naa:
+who:	University of Chicago (=) UCHICAGO
+what:	61001
+when:	2007.09.11
+where:	http://www.lib.uchicago.edu
+how:	NP | (:unkn) unknown | 2007 |
+
+naa:
+who:	Bibliothèque et Archives Nationales du Québec (=) National Libary and Archives of Quebec (=) BANQ
+what:	52327
+when:	2007.10.18
+where:	http://www.banq.qc.ca
+how:	NP | (:unkn) unknown | 2007 |
+
+naa:
+who:	National Széchényi Library (=) National Library of Hungary (=) OSZK
+what:	39331
+when:	2008.03.05
+where:	http://www.oszk.hu
+how:	NP | (:unkn) unknown | 2008 |
+
+naa:
+who:	Library and Archives Canada (=) Bibliothèque et Archives Canada (=) LAC
+what:	26677
+when:	2008.05.15
+where:	http://collectionscanada.ca
+how:	NP | (:unkn) unknown | 2008 |
+
+naa:
+who:	Centre de Musique Baroque de Versailles (=) CMBV
+what:	13681
+when:	2008.09.19
+where:	http://www.cmbv.fr
+how:	NP | (:unkn) unknown | 2008 |
+
+naa:
+who:	Centre Informatique National de l'Enseignement Supérieur (=) French National Data Center for Higher Education and Scientific Research (=) CINES
+what:	87895
+when:	2008.10.14
+where:	http://www.cines.fr
+how:	NP | (:unkn) unknown | 2008 |
+
+naa:
+who:	Bibliothèque municipale de Toulouse (=) Toulouse Municipal Library (=) BIBTOULOUSE
+what:	74899
+when:	2009.01.23
+where:	http://www.bibliotheque.toulouse.fr
+how:	NP | (:unkn) unknown | 2009 |
+
+naa:
+who:	Family Search (=) FS
+what:	61903
+when:	2009.02.13
+where:	http://www.familysearch.org
+how:	NP | (:unkn) unknown | 2009 |
+
+naa:
+who:	University of California Santa Barbara (=) UCSB
+what:	48907
+when:	2009.03.13
+where:	http://library.ucsb.edu
+how:	NP | (:unkn) unknown | 2009 |
+
+naa:
+who:	George Eastman House - International Museum of Photography and Film (=) GEH
+what:	36253
+when:	2009.03.17
+where:	http://www.eastmanhouse.org
+how:	NP | (:unkn) unknown | 2009 |
+
+naa:
+who:	Appalachian State University (=) APPSTATE
+what:	23257
+when:	2009.05.18
+where:	http://www.appstate.edu
+how:	NP | (:unkn) unknown | 2009 |
+
+naa:
+who:	Jüdisches Museum Berlin (=) Jewish Museum Berlin (=) JMBERLIN
+what:	10261
+when:	2009.07.22
+where:	http://www.jmberlin.de
+how:	NP | (:unkn) unknown | 2009 |
+
+naa:
+who:	University of Houston (=) UHOUSTON
+what:	84475
+when:	2009.07.22
+where:	http://www.uh.edu
+how:	NP | (:unkn) unknown | 2009 |
+
+naa:
+who:	Consejo Superior de Investigaciones Científicas (=) Spanish National Research Council (=) CSIC
+what:	71479
+when:	2009.10.14
+where:	http://www.csic.es
+how:	NP | (:unkn) unknown | 2009 |
+
+naa:
+who:	Archives départementales de la Somme (=) Somme Departmental Archives (=) ADSOMME
+what:	58483
+when:	2009.10.21
+where:	http://www.somme.fr
+how:	NP | NR, OP | 2009 | http://archives.somme.fr/download.cgi?filename=accounts/mnesys_ad80/datas/cms/aide_fr_v04_2.pdf
+
+naa:
+who:	Bibliothèque Cujas (=) Cujas inter-university library (Paris 1 Panthéon Sorbonne and Paris 2 Assas) (=) BIUCUJAS
+what:	45829
+when:	2009.10.28
+where:	http://biu-cujas.univ-paris1.fr
+how:	NP | (:unkn) unknown | 2009 |
+
+naa:
+who:	Massachusetts Institute of Technology (=) MIT
+what:	32833
+when:	2009.11.17
+where:	http://libraries.mit.edu
+how:	NP | (:unkn) unknown | 2009 |
+
+naa:
+who:	Simon Fraser University (=) SFU
+what:	19837
+when:	2009.12.16
+where:	http://www.sfu.ca
+how:	NP | (:unkn) unknown | 2009 |
+
+naa:
+who:	British Library (=) BL
+what:	81055
+when:	2010.01.21
+where:	http://www.bl.uk
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	Centre National d'Études Spatiales (=) French Space Agency (=) CNES
+what:	68059
+when:	2010.02.02
+where:	http://www.cnes.fr
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	Columbia College Chicago (=) COLUMCC
+what:	55405
+when:	2010.02.19
+where:	http://www.colum.edu
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	The Pennsylvania State University (=) PSU
+what:	42409
+when:	2010.03.03
+where:	http://www.psu.edu
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	University of Pennsylvania (=) UPENN
+what:	29413
+when:	2010.04.07
+where:	http://www.upenn.edu
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	University of Kentucky (=) UKY
+what:	16417
+when:	2010.04.09
+where:	http://www.uky.edu
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	Humboldt-Universität zu Berlin (=) Humboldt University Berlin (=) HUB
+what:	77635
+when:	2010.06.07
+where:	http://www.hu-berlin.de
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	Lo CIRDÒC – Mediatèca occitana (=) CIRDOC
+what:	64981
+when:	2010.06.21
+where:	http://www.locirdoc.fr
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	University of Illinois at Urbana Champaign (=) UIUC
+what:	51985
+when:	2010.07.12
+where:	http://illinois.edu
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	The George Washington University (=) GWU
+what:	38989
+when:	2010.08.20
+where:	http://gwu.edu
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:    Archives départementales du Doubs (=) ADDOUBS
+what:   25993
+when:   2010.08.23
+where:  http://archives.doubs.fr
+how:    NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	Archives départementales du Territoire de Belfort (=) ADBELFORT
+what:   12997
+when:	2010.08.23
+where:	http://www.archives.cg90.fr
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	Archives de la ville de Pontivy (=) ADPONTIVY
+what:   87553
+when:	2010.08.23
+where:	http://archives.pontivy.fr
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	Rockefeller Archive Center (=) RAC
+what:   74557
+when:	2010.08.31
+where:	http://www.rockarch.org
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	les archives nationales d'outre-mer (=) National Overseas Archives (=) ANOM
+what:   61561
+when:	2010.09.23
+where:	http://anom.archivesnationales.culture.gouv.fr
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	Ville de Besançon (=) VB
+what:   48565
+when:	2010.09.28
+where:	http://www.besancon.fr
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	Conseil Général de la Martinique (=) General Counsel of Martinique (=) CG972
+what:   35569
+when:	2010.10.22
+where:	http://www.cg972.fr
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	ITHAKA (=) ITHAKA
+what:   22573
+when:	2010.11.18
+where:	http://www.ithaka.org
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	Archives départementales de l'Allier (=) ADA
+what:   84133
+when:	2010.11.22
+where:	http://archives.allier.fr
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	Archives départementales de la Côte-d'Or (=) ADCO
+what:   71137
+when:	2010.11.25
+where:	http://www.archives.cotedor.fr
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	�sterreichische Nationalbibliothek (=) National Library of Austria (=) ONB
+what:   58141
+when:	2010.12.03
+where:	http://www.onb.ac.at
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	New York Public Library (=) NYPL
+what:   45145
+when:	2010.12.18
+where:	http://www.nypl.org
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	Purdue University (=) PU
+what:   34231
+when:	2011.01.24
+where:	http://www.purdue.edu
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	Centre national de documentation pédagogique (=) French National Pedogical Documentation Center (=) CNDP
+what:   19153
+when:	2011.02.12
+where:	http://www.cndp.fr
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	Biblioteca Nacional de Portugal (=) National Library of Portugal (=) BNP
+what:   80713
+when:	2011.02.12
+where:	http://www.bnportugal.pt
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	Ministère de la culture et de la communication (=) French Ministry of Culture and Communication (=) MCC
+what:   67717
+when:	2011.03.14
+where:	http://collections.culture.fr
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	Institut national d'histoire de l'art (=) French National Institute for the History of Art (=) INHA
+what:   54721
+when:	2011.03.31
+where:	http://www.inha.fr
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	Research Center for Islamic History, Art and Culture (=) IRCICA
+what:   41725
+when:	2011.04.22
+where:	http://www.ircica.org
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	Archives départementales du Rhône (=) ADR
+what:   28729
+when:	2011.05.08
+where:	http://www.rhone.fr/education_culture_loisirs/mediatheque_archives/archives_departementales
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	Archives départementales du Cantal (=) ADC
+what:   16075
+when:	2011.05.27
+where:	http://archives.cantal.fr
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	Archives départementales de la Savoie (=) ADS
+what:	77293
+when:	2011.06.07
+where:	http://www.savoie-archives.fr
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	Archives départementales du Pas-de-Calais (=) ADPC
+what:	64297
+when:	2011.06.07
+where:	http://www.archivespasdecalais.fr
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	Fundación Centro de Estudios Andaluces (=) Andalusian Studies Centre Foundation (=) FCEA
+what:	51301
+when:	2011.06.20
+where:	http://www.centrodeestudiosandaluces.es
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	University of California Santa Cruz (=) UCSC
+what:	38305
+when:	2011.06.24
+where:	http://www.ucsc.edu
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	Archives départementales de la Gironde (=) ADGIRONDE
+what:	25651
+when:	2011.08.18
+where:	http://gael.gironde.fr
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	ACCOLAD Franche-Comté (=) ACCOLAD
+what:	12655
+when:	2011.09.13
+where:	http://www.livre-franchecomte.com
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	Archives départementales de la Marne (=) ADMARNE
+what:	86869
+when:	2011.09.26
+where:	http://www.marne.fr/index.php/public/Les-Liens-Du-Conseil-General/Les-Archives-Departementales
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	National Center for Ecological Analysis and Synthesis (=) NCEAS
+what:	85063
+when:	2011.12.13
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	Consortium on Qualitative Research Methods (=) CQRM
+what:	85064
+when:	2011.12.13
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	National Center for Atmospheric Research (=) NCAR
+what:	85065
+when:	2011.12.13
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	United States Geological Survey (=) USGS
+what:	85066
+when:	2011.12.13
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	Oak Ridge National Laboratory (=) ORNL
+what:	83334
+when:	2011.12.13
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	Ville de Paris (=) VP
+what:	73873
+when:	2011.12.13
+where:	http://www.paris.fr
+how:	NP | (:unkn) unknown | 2011 |
+
+naa:
+who:	Archives départementales de la Nièvre (=) ADNIEVRE
+what:	60877
+when:	2012.01.02
+where:	http://www.cg58.fr/services-au-public/archives-departementales
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Inoc Aquitania (=) INOC
+what:	32149
+when:	2012.01.02
+where:	http://www.sondaqui.com
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Indiana University (=) IU
+what:	85967
+when:	2012.01.04
+where:	http://www.indiana.edu
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	NASA Goddard Space Flight Center (=) NASAGSFC
+what:	85067
+when:	2012.01.24
+where:	http://www.nasa.gov/goddard
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	SDSC OpenTopography Facility (=) SDSCOTF
+what:	85069
+when:	2012.02.07
+where:	http://www.opentopography.org
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Digital Antiquity (=) DIGANT
+what:	86067
+when:	2012.02.21
+where:	http://www.digitalantiquity.org
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Data-Planet (=) DATAPLANET
+what:	86068
+when:	2012.02.21
+where:	http://www.conquestsystems.com
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	LabArchives (=) LABARCH
+what:	86070
+when:	2012.02.29
+where:	http://www.labarchives.com
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	University of California Merced (=) UCM
+what:	86071
+when:	2012.03.02
+where:	http://ucmercedlibrary.info
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	UCSD Signaling Gateway (=) UCSDSG
+what:	86072
+when:	2012.03.05
+where:	http://www.signaling-gateway.org
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Long-Term Ecological Research Network (=) LTERN
+what:	86073
+when:	2012.03.05
+where:	http://www.lternet.edu
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	American Astronomical Society (=) AAS
+what:	86074
+when:	2012.03.05
+where:	http://aas.org
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Cornell Institute for Social and Economic Research (=) CISER
+what:	86077
+when:	2012.03.05
+where:	http://ciser.cornell.edu
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Fred Hutchinson Cancer Research Center (=) FHCRC
+what:	86076
+when:	2012.03.05
+where:	http://www.fhcrc.org
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	UCLA Department of Ecology and Evolutionary Biology (=) UCLAEEB
+what:	86079
+when:	2012.03.12
+where:	http://www.eeb.ucla.edu
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Collaborative Research Computational Neuroscience Program (=) CRCNSP
+what:	86080
+when:	2012.03.12
+where:	http://crcns.org
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	UCSD Biosciences Division (=) UCSDBD
+what:	86081 
+when:	2012.03.28
+where:	http://biology.ucsd.edu
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Oregon Health and Science University (=) OHSU
+what:	86083 
+when:	2012.04.03
+where:	http://www.ohsu.edu
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	University of Prince Edward Island (=) UPEI
+what:	10987
+when:	2012.04.05
+where:	http://www.upei.ca
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Université Claude Bernard Lyon 1 (=) University of Lyon 1 (=) UCBL
+what:	47881
+when:	2012.04.13
+where:	http://www.univ-lyon1.fr
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Archives départementales des Landes (=) Landes Departmental Archives (=) ADLANDES
+what:	35227
+when:	2012.04.24
+where:	http://www.archives.landes.org
+how:	NP | NR, OP | 2012 |
+
+naa:
+who:	Digital Science (=) DIGSCI
+what:	86084
+when:	2012.05.17
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Partnership for Interdisciplinary Studies of Coastal Oceans (=) PISCO
+what:	86085
+when:	2012.05.22
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Archives départementales de l'Ain (=) ADAIN
+what:	22231
+when:	2012.05.26
+where:	http://www.archives-numerisees.ain.fr
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	University of California Riverside (=) UCRIVERSIDE
+what:	86086
+when:	2012.05.26
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	University of Oregon (=) UOREGON
+what:	87264
+when:	2012.05.26
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	National Snow and Ice Data Center (=) NSIDC
+what:	87265
+when:	2012.05.30
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Harte Research Institue (=) HRI
+what:	87266
+when:	2012.06.08
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Facultés Universitaires Notre-Dame de la Paix (Namur) (=) University of Namur (=) FUNDP
+what:	83449
+when:	2012.06.17
+where:	http://www.fundp.ac.be/universite
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Oregon State University (=) OSU
+what:	87267
+when:	2012.06.21
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Bourns College of Engineering (=) BCOE
+what:	87268
+when:	2012.06.27
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Federation of Earth Science Information Partners (=) ESIPFED
+what:	87269
+when:	2012.06.27
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	California Coastal Atlas (=) UCSDCCA
+what:	84246
+when:	2012.06.27
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Massage Therapy Association of British Columbia (=) MTABC
+what:	70453
+when:	2012.06.27
+where:	http://massagetherapy.bc.ca
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	ONEShare Data Service (=) ONESHARE
+what:	90135
+when:	2012.07.02
+where:	http://n2t.net
+how:	NP | NR, OP | 2012 |
+
+naa:
+who:	Skaggs School of Pharmacy (=) UCSDSSPPS
+what:	87270
+when:	2012.07.02
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	UCSF Clinical and Translational Science Institute (=) UCSFCTSI
+what:	87272
+when:	2012.07.10
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Archives départementales du Loir-et-Cher (=) ADLC
+what:	57457
+when:	2012.07.11
+where:	http://www.culture41.fr
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Archives départementales de l'Oise (=) ADO
+what:	44803
+when:	2012.07.11
+where:	http://www.archives.oise.fr
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Washington State University (=) WSU
+what:	87273
+when:	2012.07.20
+where:	http://wsu.edu
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	University of Notre Dame (=) UND
+what:	87274
+when:	2012.07.20
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	University of Massachusetts Amherst (=) UMA
+what:	87275
+when:	2012.07.24
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Center for Studies in Demography and Ecology (=) CSDE     
+what:	87276
+when:	2012.08.07
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	IU Cyberinfrastructure for Network Science Center (=) IUCNS
+what:	87277
+when:	2012.08.11
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	University of Utah (=) UUTAH
+what:	87278
+when:	2012.08.16
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Ocean Observatory Initiative (=) OOI
+what:	87279
+when:	2012.08.16
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Open Cloud Consortium (=) OCC
+what:	31807
+when:	2012.08.22
+where:	http://opencloudconsortium.org
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	University of California Irvine (=) UCIRVINE
+what:	87280
+when:	2012.09.10
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Johns Hopkins University (=) JHU
+what:	87281
+when:	2012.09.13
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Archives municipales de LYON (=) AMLYON
+what:	18811
+when:	2012.09.17
+where:	http://www.archives-lyon.fr/archives
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	UNAVCO (=) UNAVCO
+what:	87283
+when:	2012.09.21
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Archives départementales de la Haute-Savoie (=) ADHS
+what:	67033
+when:	2012.09.29
+where:	http://archives.cg74.fr
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Rolling Deck to Repository Program (=) R2R
+what:	87284
+when:	2012.10.04
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Center for Multiscale Modeling of Atmospheric Processes (=) CMMAP
+what:	87285
+when:	2012.11.10
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	University of Alberta (=) UALBERTA
+what:	54379
+when:	2012.11.15
+where:	http://www.ualberta.ca
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Archives départementales du Cher (=) ADCHER
+what:	41383
+when:	2012.11.28
+where:	http://www.archives18.fr
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Peerj (=) PEERJ
+what:	87287
+when:	2012.12.06
+where:	http://n2t.net
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	Archives départementales de la Vienne (=) ADV
+what:	28387
+when:	2012.12.11
+where:	http://www.archives-vienne.cg86.fr
+how:	NP | (:unkn) unknown | 2012 |
+
+naa:
+who:	NAAN Reserved for Uniform Resource Names (=) URNS
+what:	97720
+when:	2011.11.15
+where:	http://n2t.net
+how:	NP | NR, OP | 2011 |
+
+naa:
+who:	Metadata Terms (=) TERMS
+what:	99152
+when:	2007.10.02
+where:	http://n2t.net
+how:	NP | NR, OP | 2007 |
+
+naa:
+who:	People, Groups, and Institutions as Agents (=) AGENTS
+what:	99166
+when:	2010.08.04
+where:	http://n2t.info
+how:	NP | NR, OP | 2010 |
+
+naa:
+who:	NAAN Reserved for Invalid or Impossible ARKs (=) INVALID
+what:	99999
+when:	2010.08.04
+where:	http://n2t.info
+how:	NP | (:unkn) unknown | 2010 |
+
+naa:
+who:	NAAN Reserved for use in Examples (=) EXAMPLE
+what:	12345
+when:	2007.10.02
+where:	http://n2t.info
+how:	NP | (:unkn) unknown | 2007 |
+</pre></body></html>Ztext/plain    ( F ] l ~ � � � єd                           �o
